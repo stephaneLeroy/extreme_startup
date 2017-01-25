@@ -316,11 +316,12 @@ module ExtremeStartup
     class << self
       def question_bank
         [
-          ["who is the Prime Minister of Great Britain", "Theresa May"],
+          ["who is the President of France", "Francois Hollande"],
           ["which city is the Eiffel tower in", "Paris"],
           ["what currency did Spain use before the Euro", "peseta"],
-          ["what colour is a banana", "yellow"],
-          ["who played James Bond in the film Dr No", "Sean Connery"]
+          ["what colour is a troll", "green"],
+          ["who played James Bond in the film Dr No", "Sean Connery"],
+          ["who is his father", "Dark Vador"]
         ]
       end
     end
