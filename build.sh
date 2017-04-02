@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t extreme_startup .
+sudo docker build -t extreme_startup .

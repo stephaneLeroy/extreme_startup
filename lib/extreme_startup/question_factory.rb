@@ -190,6 +190,19 @@ module ExtremeStartup
     end
   end
 
+  class MultiplicationMultiplicationQuestion < TernaryMathsQuestion
+    def as_text
+      "what is #{@n1} multiplied by #{@n2} multiplied by #{@n3}"
+    end
+    def points
+      30
+    end
+    private
+    def correct_answer
+      @n1 * @n2 * @n3
+    end
+  end
+
   class AdditionMultiplicationQuestion < TernaryMathsQuestion
     def as_text
       "what is #{@n1} plus #{@n2} multiplied by #{@n3}"
@@ -397,42 +410,6 @@ module ExtremeStartup
     end
   end
 
-  class QuestionFactory
-    attr_reader :round
-
-    def initialize
-      @round = 1
-      @question_types = [
-        AdditionQuestion,
-        MaximumQuestion,
-        MultiplicationQuestion,
-        SquareCubeQuestion,
-        GeneralKnowledgeQuestion,
-        PrimesQuestion,
-        SubtractionQuestion,
-        FibonacciQuestion,
-        PowerQuestion,
-        AdditionAdditionQuestion,
-        AdditionMultiplicationQuestion,
-        MultiplicationAdditionQuestion,
-        AnagramQuestion,
-        ScrabbleQuestion
-      ]
-    end
-
-    def next_question(player)
-      window_end = (@round * 2 - 1)
-      window_start = [0, window_end - 4].max
-      available_question_types = @question_types[window_start..window_end]
-      available_question_types.sample.new(player)
-    end
-
-    def advance_round
-      @round += 1
-    end
-
-  end
-
   class WarmupQuestion < Question
     def initialize(player)
       @player = player
@@ -445,6 +422,44 @@ module ExtremeStartup
     def as_text
       "what is your name"
     end
+  end
+
+  class QuestionFactory
+    attr_reader :round
+
+    def initialize
+      @round = 1
+      @question_types = [
+        WarmupQuestion,
+        AnagramQuestion,
+        AdditionQuestion,
+        MultiplicationQuestion,
+        AdditionAdditionQuestion,
+        MultiplicationMultiplicationQuestion,
+        AdditionMultiplicationQuestion,
+        MultiplicationAdditionQuestion,
+        SubtractionQuestion,
+        GeneralKnowledgeQuestion,
+        MaximumQuestion,
+        SquareCubeQuestion,
+        PrimesQuestion,
+        FibonacciQuestion,
+        PowerQuestion,
+        ScrabbleQuestion
+      ]
+    end
+
+    def next_question(player)
+      window_end = (@round * 2 - 1)
+      window_start = 0
+      available_question_types = @question_types[window_start..window_end]
+      available_question_types.sample.new(player)
+    end
+
+    def advance_round
+      @round += 1
+    end
+
   end
 
   class WarmupQuestionFactory

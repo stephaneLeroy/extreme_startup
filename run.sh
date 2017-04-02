@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run -d -p 80:3000 extreme_startup
+sudo docker run -d -p 3000:3000 --name extrem_startup extreme_startup
